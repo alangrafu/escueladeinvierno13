@@ -1,0 +1,19 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Mi página</title>
+	</head>
+	<body>
+		<script src="js/d3.v3.min.js"></script>
+		<script>
+		var datos = ["hugo", "paco", "luis"];
+
+		var lista = d3.select("body").append("ul");
+		lista.selectAll("li")
+		  .data(datos)
+		  .enter()
+		  .append("li")
+		  .html(function(d){return d});
+		</script>
+	</body>
+</html>

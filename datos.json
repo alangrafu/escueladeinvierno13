@@ -1,0 +1,14 @@
+{
+	"string": "Este es un valor",
+	"numero": 123,
+	"arreglo": [
+			"Este",
+			"es",
+			"un",
+			"arreglo"
+		],
+	"objeto": {
+			"otros": "valores",
+			"otro_numero": 1234
+		}
+}

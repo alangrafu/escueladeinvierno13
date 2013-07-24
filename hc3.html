@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Ejemplo Highcharts</title>
+  <link rel="stylesheet" href="css/estilo.css">
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+</head>
+<body>
+    <div id="container" class="highcharts"></div>
+    <script src="js/highcharts.js"></script>
+    <script type="text/javascript">
+    //DATOS
+    var datos = [{
+        name: 'Acciones Empresa A',
+        data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
+    }, {
+        name: 'Acciones Empresa B',
+        data: [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5]
+    }];
+
+    //CREACION DE VISUALIZACION
+    var config = {
+                    chart: {
+                        type: 'column'
+                    },
+                yAxis: {
+                        title: {
+                        text: 'Precio ($)'
+                    }
+                },
+        title: {"text": "Mi gráfico"},
+        subtitle: {"text": "Con subtítulo"},
+        yAxis: {
+                title: {
+                    text: 'Precio ($)'
+                }
+            },
+        xAxis: {
+                title: {
+                    text: 'Años',
+                },
+                    categories: ["2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012"]            
+            },
+            series: datos
+    };
+    $("#container").highcharts(config);
+    </script>
+</body>
+</html>

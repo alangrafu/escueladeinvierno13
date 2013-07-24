@@ -1,0 +1,1132 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+
+	<title>Visualización de datos</title>
+
+	<meta name="description" content="Presentación para le Escuela de Invierno de Datos">
+	<meta name="author" content="Alvaro Graves">
+
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<link rel="stylesheet" href="css/reveal.min.css">
+
+	<!-- For syntax highlighting -->
+	<link rel="stylesheet" href="lib/css/zenburn.css">
+
+	<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+	<script>
+	document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+	</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+		<link rel="stylesheet" href="css/custom.css">
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>Visualización de datos</h1>
+					<h3>Cómo presentar datos en la Web</h3>
+					
+					<h4><a href="http://graves.cl">Alvaro Graves</a> / <a href="http://twitter.com/alvarograves">@alvarograves</a></h4>
+				</section>
+				<section>
+					<h2>Qué vamos a ver</h2>
+					<ul>
+						<li>Motivación</li>
+						<li>Principios básicos de la Web</li>
+						<li>Creación de gráficos con Highcharts</li>
+						<li>Creación de mapas con Open Street Maps y Open Layers</li>
+						<li>Creación de visualizaciones complejas con D3.js</li>
+					</ul>
+				</section>
+				<section>
+					<section>
+						<h1>Motivación</h1>
+					</section>
+					<section>
+						<h2>¿Qué es una visualización?</h2>
+						<ul>
+							<li>En general podemos definir una visualización a cualquier representación <strong>visual</strong> de datos.
+								<ul>
+									<li>Mapas</li>
+									<li>Charts (gráficos de torta, de barras)</li>
+									<li>Visualización de grafos</li>
+									<li>Otros</li>
+								</ul>
+							</li>
+							<li>
+								Para el caso de este taller nos vamos a enfocar en visualizaciones <em>en la Web</em>
+							</li>
+							<ul>
+							</section>
+							<section>
+									<h2>¿Por qué es importante visualizar datos?</h2>
+									<ul>
+										<li>
+											Las visualizaciones ayudan a consumir grandes volúmenes de datos que de otra forma sería muy difícil para los humanos a procesar
+										</li>
+										<li>
+											Ayuda a entender grandes tendencias presentes en los datos
+										</li>
+										<li>
+											Ayuda a descubrir eventos que no estábamos buscando (p. ej. outliers)
+										</li>
+										<li>
+											Son un gran complemento a una serie de técnicas estadísticas
+										</li>
+									</ul>
+								</section>
+								<section>
+									<h2>Ejemplo</h2>
+									<img src='tabla1.png'/>
+								</section>
+								<section>
+									<h2>Análisis estadístico</h2>
+									<ul>
+										<li>Misma media</li>
+										<li>Misma varianza (casi la misma en valores de <em>y</em>)</li>
+										<li>Misma correlación</li>
+										<li>Misma regresión lineal</li>
+									</ul>
+								</section>
+								<section>
+									<h2>Análisis visual</h2>
+									<img src='tabla2.png'/>
+								</section>
+						</section>
+						<section>
+							<section>
+								<h1>Principios básicos de la Web</h1>
+							</section>
+							<section>
+								<h2>¿Cómo se compone una página web?</h2>
+								<ul>
+									<li>HTML (<em>Hypertext Markup Language</em>): Lenguaje de marcardo de hypertexto</li>
+									<li>Código Javascript: lenguaje de programación</li>
+									<li>CSS (<em>Cascading Style Sheets</em>): Hojas de estilo, enfocadas a cómo presentar el contenido</li>
+									<li>Imágenes, generalmente en formatos <tt>PNG</tt>, <tt>JPEG</tt> o <tt>GIF</tt>
+									</li>
+									<li>Contenido asíncrono (generalmente JSON) via AJAX</li>
+								</ul>
+							</section>
+							<section>
+								<h2>¿Cómo funciona la Web?</h2>
+								<img src='http.png'/>
+							</section>
+							<section>
+								<h2>¿Cómo funciona la Web?</h2>
+								<img src='http2.png'/>
+							</section>
+							<section>
+								<h2>¿Cómo funciona la Web?</h2>
+								<img src='http3.png'/>
+							</section>
+							<section>
+								<h2>¿Cómo funciona la Web?</h2>
+								<img src='http4.png'/>
+							</section>
+				<section>
+					<h2>HTML</h2>
+					<p>Define la estructura y contenido de la página</p>
+					<pre><code>
+&lt;html&gt;
+	&lt;head&gt;
+		&lt;title&gt;Mi página&lt;/title&gt;
+	&lt;/head&gt;
+	&lt;body&gt;
+		&lt;h1&gt;Hola Mundo!&lt;/h1&gt;
+		&lt;div id="saludo"&gt;Este es un ejemplo&lt;/div&gt;
+		&lt;div class="footer"&gt;Adios&lt;/div&gt;		
+	&lt;/body&gt;
+&lt;/html&gt;
+
+
+					</code></pre>
+				</section>
+				<section>
+					<h2>Ejemplo 1</h2>
+					<iframe src="ejemplo1.html" width="600" height="300"></iframe>
+				</section>
+				<section>
+					<h2>CSS</h2>
+					<p>Permite definir propiedades visuales de los distintos elementos en HTML</p>
+					<caption>ejemplo.html</caption>
+					<pre><code>&lt;html&gt;
+	&lt;head&gt;
+		&lt;title&gt;Mi página&lt;/title&gt;
+		&lt;link rel="stylesheet" href="css/estilo.css"&gt;
+	&lt;/head&gt;
+	&lt;body&gt;
+		&lt;h1&gt;Hola Mundo!&lt;/h1&gt;
+		&lt;div id="saludo"&gt;Este es un ejemplo&lt;/div&gt;
+		&lt;div class="footer"&gt;Adios&lt;/div&gt;		
+	&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+					<caption>estilo.css</caption>
+					<pre><code>
+h1 {
+	color: red;
+}
+#saludo{
+	font-weight:bold;
+}
+.footer{
+	font-family: courier;
+}
+					</code></pre>
+
+				</section>
+				<section>
+					<h2>Ejemplo 1 + CSS</h2>
+					<iframe src="ejemplo2.html" width="600" height="300"></iframe>
+				</section>
+			<section>
+				<h2>Javascript</h2>
+					<caption>ejemplo.html</caption>
+					<pre><code>&lt;html&gt;
+	&lt;head&gt;
+		&lt;title&gt;Mi página&lt;/title&gt;
+		&lt;script src="js/test.js"&gt;&lt;/script&gt;
+	&lt;/head&gt;
+	&lt;body&gt;
+		&lt;h1&gt;Hola Mundo!&lt;/h1&gt;
+		&lt;div id="saludo"&gt;Este es un ejemplo&lt;/div&gt;
+		&lt;div class="footer" onclick="saluda()"&gt;PRESIONA AQUI&lt;/div&gt;		
+	&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<caption>test.js</caption>
+					<pre><code>
+function saluda(){
+	alert("Adios Mundo!");
+}
+					</code></pre>
+
+				</section>
+				<section>
+					<h2>Ejemplo 1 + Javascript</h2>
+					<iframe src="ejemplo3.html" width="600" height="300"></iframe>
+				</section>
+			<section>
+				<h2>JSON</h2>
+				<ul>
+					<li>JSON (<em>JavaScript Object Notation</em>) es una notación para describir datos</li>
+				</ul>
+				<pre><code>
+{
+	"string": "Este es un valor",
+	"numero": 123,
+	"arreglo": [
+			"Este",
+			"es",
+			"un",
+			"arreglo"
+		],
+	"objeto": {
+			"otros": "valores",
+			"otro_numero": 1234
+		}
+}
+		</code></pre>
+<p>Es posible acceder a las propiedades del objeto <tt>obj</tt> usando notación de punto</p>
+<ul>
+<li><tt>obj.numero</tt> &rarr; 123</li>
+<li><tt>obj.arreglo</tt> &rarr; <tt>["Este", "es", "un", "arreglo"]</tt></li>
+</ul>
+	</section>
+				<section>
+					<h2>AJAX</h2>
+					<ul>
+						<li>AJAX (<em>Asynchronous JavaScript and XML</em>) permite obtener datos de manera asíncrona</li>
+					</ul>
+					<pre><code>
+d3.json("http://ejemplo.com/data.json", function(data) {
+	alert(data.length)
+});
+				</code></pre>
+
+			</section>
+			<section>
+				<h2>Javascript + AJAX + JSON</h2>
+					<caption>ejemplo.html</caption>
+					<pre><code>&lt;html&gt;
+	&lt;head&gt;
+		&lt;title&gt;Mi página&lt;/title&gt;
+		&lt;script src="js/d3.v3.min.js"&gt;&lt;/script&gt;
+		&lt;script src="js/ajax.js"&gt;&lt;/script&gt;
+	&lt;/head&gt;
+	&lt;body&gt;
+		&lt;h1&gt;Hola Mundo!&lt;/h1&gt;
+		&lt;div id="mensaje"&gt;&lt;/div&gt;
+		&lt;div class="footer" onclick="obtenDatos()"&gt;PRESIONA AQUI&lt;/div&gt;		
+	&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<caption>test.js</caption>
+					<pre><code>
+function obtenDatos(){
+	d3.json("datos.json", function(data){
+		var frase = data.arreglo.join(" ");
+		d3.select("#mensaje").html(frase);
+	})
+}
+					</code></pre>
+
+				</section>
+
+				<section>
+					<h2>Ejemplo 1 + Javascript + AJAX</h2>
+					<iframe src="ejemplo4.html" width="600" height="300"></iframe>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h1>Highcharts</h1>
+				</section>
+				<section>
+					<h2>Highcharts</h2>
+					<p>Highcharts es una biblioteca JavaScript enfocada a crear gráficos en la Web</p>
+					<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;script type="text/javascript" src="js/jquery.min.js"&gt;&lt;/script&gt;
+  &lt;script src="js/highcharts.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div id="container" class="highcharts"&gt;&lt;/div&gt;
+    &lt;script type="text/javascript"&gt;
+    //DATOS
+    var datos = [{
+        name: 'Acciones Empresa A',
+        data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
+    }, {
+        name: 'Acciones Empresa B',
+        data: [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5]
+    }];
+
+    //CREACION DE VISUALIZACION
+    var config = {
+        chart: {
+            type: 'line'
+        },
+        series: datos
+    };
+    $("#container").highcharts(config);    
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+</code></pre>
+</section>
+				<section>
+					<h2>Primer ejemplo Highcharts</h2>
+					<button onclick="show('hc1')" id="hc1button">Ver ejemplo</button>
+					<div style="height: 500px" id="hc1"></div>
+				</section>
+				<section>
+					<h2>Opciones</h2>
+					<p>Highcharts ofrece una <strong>tremenda</strong> cantidad de opciones</p>
+					<pre><code>    //CREACION DE VISUALIZACION
+var config = {
+                    chart: {
+                        type: 'column'
+                    },
+                yAxis: {
+                        title: {
+                        text: 'Precio ($)'
+                    }
+                },
+        title: {"text": "Mi gráfico"},
+        subtitle: {"text": "Con subtítulo"},
+        yAxis: {
+                title: {
+                    text: 'Precio ($)'
+                }
+            },
+        xAxis: {
+                title: {
+                    text: 'Años',
+                },
+                    categories: ["2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012"]            
+            },
+            series: datos
+    };
+</code></pre>
+</section>
+				<section>
+					<h2>Segundo ejemplo Highcharts</h2>
+					<button onclick="show('hc3')" id="hc3button">Ver ejemplo</button>
+					<div style="height: 500px" id="hc3"></div>
+				</section>
+
+				<section>
+					<h2>Uso de splines</h2>
+					<pre><code>    //CREACION DE VISUALIZACION
+var config = {
+                    chart: {
+                        type: 'spline' // <-DEFINE SPLINE!
+                    },
+                yAxis: {
+                        title: {
+                        text: 'Precio ($)'
+                    }
+                },
+        title: {"text": "Mi gráfico"},
+        subtitle: {"text": "Con subtítulo"},
+        yAxis: {
+                title: {
+                    text: 'Precio ($)'
+                }
+            },
+        xAxis: {
+                title: {
+                    text: 'Años',
+                },
+                    categories: ["2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012"]            
+            },
+            series: datos
+    };
+</code></pre>
+</section>
+				<section>
+					<h2>Tercer ejemplo Highcharts</h2>
+					<button onclick="show('hc2')" id="hc2button">Ver ejemplo</button>
+					<div style="height: 500px" id="hc2"></div>
+				</section>
+
+				<section>
+					<h2>Pie Charts</h2>
+					<pre><code>
+    //DATOS
+    var datos = [
+                    ["Empresa A", 44.0],
+                    ["Empresa B", 10.0],
+                    ["Empresa C", 14.1],
+                    ["Empresa D", 20.3],
+                    ["Empresa E", 11.6],                                    
+                ];
+
+    //CREACION DE VISUALIZACION
+$(function () {
+        $('#container').highcharts({
+            title: {
+                text: 'Participación del mercado'
+            },
+            series: [{
+                type: 'pie',
+                data: datos
+            }]
+        });
+    });
+    
+    $("#container").highcharts(config);
+</code></pre>
+</section>
+
+				<section>
+					<h2>Tercer ejemplo Highcharts</h2>
+					<button onclick="show('hc4')" id="hc4button">Ver ejemplo</button>
+					<div style="height: 500px" id="hc4"></div>
+				</section>
+			</section>
+
+			</section>
+
+
+			<section>
+				<section>
+					<h1>Open Layers + Open Street Maps</h1>
+				</section>
+				<section>
+					<h2>Open Layers <br/>+<br/> Open Street Maps</h2>
+					<ul>
+						<li>Open Street Maps (OSM) es un mapa colaborativo abierto</li>
+						<li>Open Layers es una biblioteca Open Source que permite desplegar mapas en páginas web</li>
+					</ul>
+					<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+	&lt;head&gt;
+		&lt;title&gt;Ejemplo OpenLayers&lt;/title&gt;
+	&lt;/head&gt;
+	&lt;body&gt;
+		&lt;div id="demoMap" style="height:500px;"&gt;&lt;/div&gt;
+		&lt;script src="js/OpenLayers.js"&gt;&lt;/script&gt;
+		&lt;script&gt;
+    		map = new OpenLayers.Map("demoMap");
+    		map.addLayer(new OpenLayers.Layer.OSM());
+    		map.zoomToMaxExtent();
+		&lt;/script&gt;
+	&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+				</section>
+				<section>
+					<h2>Primer ejemplo OpenLayers</h2>
+					<button onclick="show('ol1')" id="ol1button">Ver ejemplo</button>
+					<div style="height: 500px" id="ol1"></div>
+				</section>
+				<section>
+					<h2>Agregamos más funcionalidades</h2>
+					<h3>Centrado y zoom</h3>
+					<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;OpenLayers Demo&lt;/title&gt;
+    &lt;style type="text/css"&gt;
+      html, body, #basicMap {
+          width: 100%;
+          height: 100%;
+          margin: 0;
+      }
+    &lt;/style&gt;
+    &lt;script src="js/OpenLayers.js"&gt;&lt;/script&gt;
+    &lt;script&gt;
+      function init() {
+        map = new OpenLayers.Map("basicMap");
+        var mapnik = new OpenLayers.Layer.OSM();
+
+        //OL necesita convertir de WGS84 a Spherical Mercator
+        var desde = new OpenLayers.Projection("EPSG:4326");   // Proyección WGS 1984
+        var hacia   = new OpenLayers.Projection("EPSG:900913"); // Proyección Spherical Mercator Projection
+        //Define nueva posición y nivel zoom
+        var position       = new OpenLayers.LonLat(-70.6504,-33.437967).transform( desde, hacia);
+        var zoom           = 15; 
+ 
+        map.addLayer(mapnik);
+        //Centra mapa
+        map.setCenter(position, zoom );
+      }
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body onload="init();"&gt;
+    &lt;div id="basicMap"&gt;&lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+				</section>
+				<section>
+					<h2>Segundo ejemplo OpenLayers</h2>
+					<button onclick="show('ol2')" id="ol2button">Ver ejemplo</button>
+					<div style="height: 500px" id="ol2"></div>
+				</section>
+				<section>
+					<h2>Marcadores</h2>
+					<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;OpenLayers Demo&lt;/title&gt;
+    &lt;style type="text/css"&gt;
+      html, body, #basicMap {
+          width: 100%;
+          height: 100%;
+          margin: 0;
+      }
+    &lt;/style&gt;
+    &lt;script src="js/OpenLayers.js"&gt;&lt;/script&gt;
+    &lt;script&gt;
+      function init() {
+        map = new OpenLayers.Map("basicMap");
+        var mapnik         = new OpenLayers.Layer.OSM();
+        //OL necesita convertir de WGS84 a Spherical Mercator
+        var desde = new OpenLayers.Projection("EPSG:4326");   // Proyección WGS 1984
+        var hacia   = new OpenLayers.Projection("EPSG:900913"); // Proyección Spherical Mercator Projection
+        var zoom = 14; 
+        
+        //Define posiciones
+        var positions=[];
+        positions[0] = new OpenLayers.LonLat(-70.6504,-33.437967).transform( desde, hacia);
+        positions[1] = new OpenLayers.LonLat(-70.6504,-33.437967).transform( desde, hacia);
+
+        //Define layer de marcadores
+        var markers = new OpenLayers.Layer.Markers( "Markers" );
+        map.addLayer(markers);
+        //Define y agrega marcadores
+        var places = [];
+        for (var i in positions){
+          places[i] = new OpenLayers.Marker(positions[i]); 
+          markers.addMarker(places[i]);
+          //Agrega evento para mostrar popup
+          places[i].events.register('mouseover', places[i], function(evt) {
+            popup = new OpenLayers.Popup.FramedCloud("Popup",
+             positions[i] ,
+             null,
+             '&lt;div&gt;Hello World! &lt;/div&gt;',
+             null,
+             true);
+            map.addPopup(popup);
+          });
+
+        }
+
+       map.addLayer(mapnik);
+        //Centra mapa
+        map.setCenter(positions[0], zoom );
+map.addLayer(vector);
+
+      }
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body onload="init();"&gt;
+    &lt;div id="basicMap"&gt;&lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+				</section>
+				<section>
+					<h2>Tercer ejemplo OpenLayers</h2>
+					<button onclick="show('ol3')" id="ol3button">Ver ejemplo</button>
+					<div style="height: 500px" id="ol3"></div>
+				</section>
+
+				<section>
+					<h2>Líneas en mapa</h2>
+					<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;OpenLayers Demo&lt;/title&gt;
+    &lt;style type="text/css"&gt;
+      html, body, #basicMap {
+          width: 100%;
+          height: 100%;
+          margin: 0;
+      }
+    &lt;/style&gt;
+    &lt;script src="js/OpenLayers.js"&gt;&lt;/script&gt;
+    &lt;script&gt;
+      function init() {
+        map = new OpenLayers.Map("basicMap");
+        var mapnik         = new OpenLayers.Layer.OSM();
+        //OL necesita convertir de WGS84 a Spherical Mercator
+        var desde = new OpenLayers.Projection("EPSG:4326");   // Proyección WGS 1984
+        var hacia   = new OpenLayers.Projection("EPSG:900913"); // Proyección Spherical Mercator Projection
+        var zoom = 14;         map.addLayer(mapnik);
+ 
+        
+        //Define posiciones
+        var 
+        position = new OpenLayers.LonLat(-70.6504,-33.437967).transform( desde, hacia);
+
+//Crea line layer
+var lineLayer = new OpenLayers.Layer.Vector("Line Layer"); 
+var style = { 
+  strokeColor: 'orangered', 
+  strokeOpacity: 1,
+  strokeWidth: 5
+};
+
+
+//Primera linea
+var points1 = new Array(
+   new OpenLayers.Geometry.Point(-70.6504, -33.437967).transform(desde, hacia),
+   new OpenLayers.Geometry.Point(-70.643558, -33.435319).transform(desde, hacia)
+);
+
+var line1 = new OpenLayers.Geometry.LineString(points1);
+var lineFeature1 = new OpenLayers.Feature.Vector(line1, null, style);
+
+//SegundLinea
+var points2 = new Array(
+   new OpenLayers.Geometry.Point(-70.6504, -33.437967).transform(desde, hacia),
+   new OpenLayers.Geometry.Point(-70.633558, -33.445319).transform(desde, hacia)
+);
+
+var line2 = new OpenLayers.Geometry.LineString(points2);
+var lineFeature2 = new OpenLayers.Feature.Vector(line2, null, style);
+
+//Tercera linea
+var points3 = new Array(
+   new OpenLayers.Geometry.Point(-70.633558, -33.445319).transform(desde, hacia),
+   new OpenLayers.Geometry.Point(-70.623558, -33.445319).transform(desde, hacia)
+);
+
+var line3 = new OpenLayers.Geometry.LineString(points3);
+var lineFeature3 = new OpenLayers.Feature.Vector(line3, null, style);
+
+//Agregadas al layer
+lineLayer.addFeatures([lineFeature1, lineFeature2, lineFeature3]);
+
+
+
+        
+        //Centra mapa
+map.addLayer(lineLayer);
+map.addControl(new OpenLayers.Control.DrawFeature(lineLayer, OpenLayers.Handler.Path));      
+        map.setCenter(position, zoom );
+
+}
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body onload="init();"&gt;
+    &lt;div id="basicMap"&gt;&lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+				</section>
+				<section>
+					<h2>Cuarto ejemplo OpenLayers</h2>
+					<button onclick="show('ol4')" id="ol4button">Ver ejemplo</button>
+					<div style="height: 500px" id="ol4"></div>
+				</section>
+
+			</section>
+			<section>
+				<section>
+					<h1>Data-driven Documents (D3.js)</h1>
+				</section>
+				<section>
+					<h2>D3.js</h2>
+					<ul>
+					<li>D3.js es una biblioteca JavaScript que permite manipular elementos de una página web basado en datos</li>
+					<li>Generalmente es usado con SVG (Scalable Vector Graphics), un estándar para gráficos en la Web</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Principios detrás de D3</h2>
+					<ul>
+					<li>D3 usa concatenación de métodos (<tt>a.b().c()</tt>) y se ejecutan en orden.</li>
+					<li><tt>select()</tt> y <tt>selectAll()</tt> seleccionan un elemento del documento</li>
+					<li><tt>append()</tt> anexa un element dentro de otro</li>
+					<li><tt>data()</tt> define el arreglo de elementos que se usarán</li>
+					<li><tt>enter()</tt> "entra" en una selección</tt></li>
+				</ul>
+					<pre><code>&lt;html&gt;
+	&lt;head&gt;
+		&lt;meta charset="utf-8"&gt;
+		&lt;title&gt;Mi página&lt;/title&gt;
+	&lt;/head&gt;
+	&lt;body&gt;
+		&lt;script src="js/d3.v3.min.js"&gt;&lt;/script&gt;
+		&lt;script&gt;
+		var datos = ["hugo", "paco", "luis"];
+
+		var lista = d3.select("body").append("ul");
+		lista.selectAll("li")
+		  .data(datos)
+		  .enter()
+		  .append("li")
+		  .html(function(d){return d});
+		&lt;/script&gt;
+	&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+				</section>
+				<section>
+					<h2>Primer ejemplo D3.js</h2>
+					<button onclick="show('d1')" id="d1button">Ver ejemplo</button>
+					<div style="height: 500px" id="d1"></div>
+				</section>
+				<section>
+					<h2>Scalable Vector Graphics</h2>
+					<p>SVG es un estándar para representar gráficos 2D en la Web</p>
+					<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="300">
+   						<circle cx="400" cy="50" r="40" stroke="black" stroke-width="2" fill="olive" />
+  						<ellipse cx="300" cy="80" rx="100" ry="50" style="fill:cadetblue;" />
+						<polygon points="300,10 350,290 260,210" style="fill:orangered;stroke:purple;stroke-width:1" />
+						<rect x="200" y="20" rx="20" ry="20" width="150" height="150" style="fill:steelblue;stroke:black;stroke-width:5;opacity:0.5" />
+						<line x1="160" y1="260" x2="400" y2="100" style="stroke:steelblue;stroke-width:5" />
+					</svg> 
+					<pre><code>&lt;svg xmlns="http://www.w3.org/2000/svg" version="1.1"&gt;
+	&lt;circle cx="400" cy="50" r="40" stroke="black" stroke-width="2" fill="olive" /&gt;
+  	&lt;ellipse cx="300" cy="80" rx="100" ry="50" style="fill:cadetblue;" /&gt;
+	&lt;polygon points="300,10 350,290 260,210" style="fill:orangered;stroke:purple;stroke-width:1" /&gt;
+	&lt;rect x="200" y="20" rx="20" ry="20" width="150" height="150" style="fill:steelblue;stroke:black;stroke-width:5;opacity:0.5" /&gt;
+	&lt;line x1="160" y1="260" x2="400" y2="100" style="stroke:steelblue;stroke-width:5" /&gt;
+&lt;/svg&gt;</code></pre>
+			</section>
+			<section>
+				<h2>SVG + D3.js</h2>
+				<pre><code>&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;title&gt;Mi página&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;script src="js/d3.v3.min.js"&gt;&lt;/script&gt;
+    &lt;script&gt;
+    var datos = [[123, 54], [230, 143], [350, 99], [380, 128]];
+
+    var w = 400, h=200;
+
+    //Create elemento SVG con ancho w y alto h
+    var svg = d3.select("body").append("svg").attr("width", w).attr("height", h);
+    
+    //Agregar circulos donde la posición es función de los valores
+    svg.selectAll("circle")
+      .data(datos)
+      .enter()
+      .append("circle")
+      .attr("r", 20)
+      .attr("cx", function(d){return d[0]})
+      .attr("cy", function(d){return d[1]});
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+</section>
+				<section>
+					<h2>Segundo ejemplo D3.js</h2>
+					<button onclick="show('d2')" id="d2button">Ver ejemplo</button>
+					<div style="height: 500px" id="d2"></div>
+				</section>
+				<section>
+					<h2>Nuestros datos</h2>
+					<caption>datosd3.json</caption>
+					<pre><code>{
+	"datos": [ 4, 25, 15, 27,16, 9,17, 8,12, 23]
+}					</code></pre>
+				</section>
+				<section>
+					<pre><code>&lt;html&gt;
+	&lt;head&gt;
+		&lt;meta charset="utf-8"&gt;
+		&lt;title&gt;Mi página&lt;/title&gt;
+		&lt;style&gt;
+		svg{
+			font-family: sans-serif;
+			font-size: 10px;
+		}
+		.axis path,
+		.axis line {
+			fill: none;
+			stroke: black;
+			shape-rendering: crispEdges;
+		}
+
+		.axis text {
+			font-family: sans-serif;
+			font-size: 11px;
+		}
+		&lt;/style&gt;
+	&lt;/head&gt;
+	&lt;body&gt;
+		&lt;script src="js/d3.v3.min.js"&gt;&lt;/script&gt;
+		&lt;script&gt;
+		var h = 400, w = 400, margin = 20;
+		var svg = d3.select("body").append("svg").attr("width", w).attr("height", h);
+		d3.json("datosd3.json", function(data) {
+			//Define máximos
+			var xMax = data.datos.length,
+			    yMax = d3.max(data.datos);
+			//Define funciones de rango
+			var y = d3.scale.linear().domain([yMax, 0]).range([0 + margin, h - margin]),
+			    x = d3.scale.linear().domain([0, xMax]).range([0 + margin, w - margin]);
+			//Define rango de color
+			var color = d3.scale.linear().domain([yMax, 0]).range(['orangered', 'darkblue']);
+    		svg.selectAll("circle")
+			   .data(data.datos)
+			   .enter()
+			   .append("circle")
+			   .attr("r", 10)
+			   .attr("cx", function(d, i){return x(i+1)})
+			   .attr("cy", function(d){return y(d)})
+			   .style("fill", function(d){return color(d)})
+		});
+		&lt;/script&gt;
+	&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+				</section>
+				<section>
+					<h2>Tercer ejemplo D3.js</h2>
+					<button onclick="show('d3')" id="d3button">Ver ejemplo</button>
+					<div style="height: 500px" id="d3"></div>
+				</section>
+				<section>
+					<h2>Agregando ejes</h2>
+					<pre><code>&lt;html&gt;
+	&lt;head&gt;
+		&lt;meta charset="utf-8"&gt;
+		&lt;title&gt;Mi página&lt;/title&gt;
+		&lt;style&gt;
+		svg{
+			font-family: sans-serif;
+			font-size: 10px;
+		}
+		.axis path,
+		.axis line {
+			fill: none;
+			stroke: black;
+			shape-rendering: crispEdges;
+		}
+
+		.axis text {
+			font-family: sans-serif;
+			font-size: 11px;
+		}
+		&lt;/style&gt;
+	&lt;/head&gt;
+	&lt;body&gt;
+		&lt;script src="js/d3.v3.min.js"&gt;&lt;/script&gt;
+		&lt;script&gt;
+		var h = 400, w = 400, margin = 20;
+		var svg = d3.select("body").append("svg").attr("width", w).attr("height", h);
+		d3.json("datosd3.json", function(data) {
+			var xMax = data.datos.length;
+				yMax = d3.max(data.datos);
+			var y = d3.scale.linear().domain([yMax, 0]).range([0 + margin, h - margin]),
+				x = d3.scale.linear().domain([0, xMax]).range([0 + margin, w - margin]);
+			var color = d3.scale.linear().domain([yMax, 0]).range(['orangered', 'darkblue']);
+    		svg.selectAll("circle")
+			   .data(data.datos)
+			   .enter()
+			   .append("circle")
+			   .attr("r", 10)
+			   .attr("cx", function(d, i){return x(i+1)})
+			   .attr("cy", function(d){return y(d)})
+			   .style("fill", function(d){return color(d)})
+
+			//Define AXIS
+			var xAxis = d3.svg.axis()
+            		      .scale(x)
+                  		  .orient("bottom")
+                  		  .ticks(5);
+			svg.append("g")
+			   .attr("class", "axis")
+			   .attr("transform", "translate(0, " + (h - margin) + ")")
+			   .call(xAxis);
+
+			var yAxis = d3.svg.axis()
+            		      .scale(y)
+                  		  .orient("left")
+                  		  .ticks(5);
+			svg.append("g")
+			   .attr("class", "axis")
+			   .attr("transform", "translate(" + margin + ",0)")
+			   .call(yAxis);
+
+		});
+		&lt;/script&gt;
+	&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+			</section>
+			<section>
+				<h2>Cuarto ejemplo D3.js</h2>
+				<button onclick="show('d4')" id="d4button">Ver ejemplo</button>
+				<div style="height: 500px" id="d4"></div>
+			</section>
+			<section>
+				<h2>Animaciones</h2>
+				<p>Permite cambiar hacer cambios durante un período de tiempo</p>
+				<pre><code>&lt;html&gt;
+	&lt;head&gt;
+		&lt;meta charset="utf-8"&gt;
+		&lt;title&gt;Mi página&lt;/title&gt;
+		&lt;style&gt;
+		svg{
+			font-family: sans-serif;
+			font-size: 10px;
+		}
+		.axis path,
+		.axis line {
+			fill: none;
+			stroke: black;
+			shape-rendering: crispEdges;
+		}
+
+		.axis text {
+			font-family: sans-serif;
+			font-size: 11px;
+		}
+		&lt;/style&gt;
+	&lt;/head&gt;
+	&lt;body&gt;
+		&lt;script src="js/d3.v3.min.js"&gt;&lt;/script&gt;
+		&lt;script&gt;
+		var h = 400, w = 400, margin = 20;
+		var svg = d3.select("body").append("svg").attr("width", w).attr("height", h);
+		d3.json("datosd3.json", function(data) {
+			var xMax = data.datos.length;
+				yMax = d3.max(data.datos);
+			var y = d3.scale.linear().domain([yMax, 0]).range([0 + margin, h - margin]),
+				x = d3.scale.linear().domain([0, xMax]).range([0 + margin, w - margin]);
+			var color = d3.scale.linear().domain([yMax, 0]).range(['orangered', 'darkblue']);
+    		svg.selectAll("circle")
+			   .data(data.datos)
+			   .enter()
+			   .append("circle")
+			   .attr("r", 1)        //DEFINE QUE RADIO ES 1PX
+			   .transition()        // <- AQUI COMIENZA LA TRANSICION
+			   .attr("r", 20)
+			   .attr("cx", function(d, i){return x(i+1)})
+			   .attr("cy", function(d){return y(d)})
+			   .style("fill", function(d){return color(d)})
+			   .duration(2000);     // <- AQUI TERMINA Y DEFINE QUE DEBE DURAR 2000 ms
+
+			//Define AXIS
+			var xAxis = d3.svg.axis()
+            		      .scale(x)
+                  		  .orient("bottom")
+                  		  .ticks(5);
+			svg.append("g")
+			   .attr("class", "axis")
+			   .attr("transform", "translate(0, " + (h - margin) + ")")
+			   .call(xAxis);
+
+			var yAxis = d3.svg.axis()
+            		      .scale(y)
+                  		  .orient("left")
+                  		  .ticks(5);
+			svg.append("g")
+			   .attr("class", "axis")
+			   .attr("transform", "translate(" + margin + ",0)")
+			   .call(yAxis);
+
+		});
+		&lt;/script&gt;
+	&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+			</section>
+			<section>
+				<h2>Quinto ejemplo D3.js</h2>
+				<button onclick="show('d5')" id="d5button">Ver ejemplo</button>
+				<div style="height: 500px" id="d5"></div>
+			</section>
+			<section>
+				<h2>Eventos</h2>
+				<p>Javascript provee una serie de eventos (<tt>click</tt>, <tt>mouseover</tt>, etc) que simplifican la interacción</p>
+				<pre><code>&lt;html&gt;
+	&lt;head&gt;
+		&lt;meta charset="utf-8"&gt;
+		&lt;title&gt;Mi página&lt;/title&gt;
+		&lt;style&gt;
+		svg{
+			font-family: sans-serif;
+			font-size: 10px;
+		}
+		.axis path,
+		.axis line {
+			fill: none;
+			stroke: black;
+			shape-rendering: crispEdges;
+		}
+
+		.axis text {
+			font-family: sans-serif;
+			font-size: 11px;
+		}
+		.tooltip{
+			fill:white;
+			font-size:14px;
+		}
+		&lt;/style&gt;
+	&lt;/head&gt;
+	&lt;body&gt;
+		&lt;script src="js/d3.v3.min.js"&gt;&lt;/script&gt;
+		&lt;script&gt;
+		var h = 400, w = 400, margin = 20;
+		var svg = d3.select("body").append("svg").attr("width", w).attr("height", h);
+		d3.json("datosd3.json", function(data) {
+			var xMax = data.datos.length;
+				yMax = d3.max(data.datos);
+			var y = d3.scale.linear().domain([yMax, 0]).range([0 + margin, h - margin]),
+				x = d3.scale.linear().domain([0, xMax]).range([0 + margin, w - margin]);
+			var color = d3.scale.linear().domain([yMax, 0]).range(['orangered', 'darkblue']);
+    		svg.selectAll("circle")
+			   .data(data.datos)
+			   .enter()
+			   .append("circle")
+			   .attr("r", 1)
+			   .transition()
+			   .attr("r", 20)
+			   .attr("cx", function(d, i){return x(i+1)})
+			   .attr("cy", function(d){return y(d)})
+			   .style("fill", function(d){return color(d)})
+			   .duration(2000);
+
+
+			//COMIENZA EVENTO 
+			//CREA ELEMENTO TEXT
+			var t = svg.append("text");
+			
+			//DEFINE EVENTO CON mouseover
+			svg.selectAll("circle").on("mouseover", function(){
+				var myX = d3.select(this).attr("cx"),
+				    myY = d3.select(this).attr("cy"),
+				    value = d3.select(this).data()
+			   	t.attr("x", myX-5).attr("y", myY).text(value);
+			});			   
+
+			//Define AXIS
+			var xAxis = d3.svg.axis()
+            		      .scale(x)
+                  		  .orient("bottom")
+                  		  .ticks(5);
+			svg.append("g")
+			   .attr("class", "axis")
+			   .attr("transform", "translate(0, " + (h - margin) + ")")
+			   .call(xAxis);
+
+			var yAxis = d3.svg.axis()
+            		      .scale(y)
+                  		  .orient("left")
+                  		  .ticks(5);
+			svg.append("g")
+			   .attr("class", "axis")
+			   .attr("transform", "translate(" + margin + ",0)")
+			   .call(yAxis);
+
+
+		});
+		&lt;/script&gt;
+	&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+			</section>
+			<section>
+				<h2>Sexto ejemplo D3.js</h2>
+				<button onclick="show('d6')" id="d6button">Ver ejemplo</button>
+				<div style="height: 500px" id="d6"></div>
+			</section>
+		</section>
+		<section>
+			<section>
+				<h3><a href='https://github.com/alangrafu/escueladeinvierno13'>https://github.com/alangrafu/escueladeinvierno13</a></h3>
+			</section>
+		</section>
+		</div>
+
+	</div>
+
+	<script src="lib/js/head.min.js"></script>
+	<script src="js/reveal.min.js"></script>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+				{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+				{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+				{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+				{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+				{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+				{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+					]
+				});
+
+			function show(id){
+				$("#"+id).append('<iframe src="'+id+'.html" width="800" height="550"></iframe>');
+				$("#"+id+"button").hide();
+			}
+
+</script>
+
+</body>
+</html>

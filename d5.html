@@ -1,0 +1,68 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Mi página</title>
+		<style>
+		svg{
+			font-family: sans-serif;
+			font-size: 10px;
+		}
+		.axis path,
+		.axis line {
+			fill: none;
+			stroke: black;
+			shape-rendering: crispEdges;
+		}
+
+		.axis text {
+			font-family: sans-serif;
+			font-size: 11px;
+		}
+		</style>
+	</head>
+	<body>
+		<script src="js/d3.v3.min.js"></script>
+		<script>
+		var h = 400, w = 400, margin = 20;
+		var svg = d3.select("body").append("svg").attr("width", w).attr("height", h);
+		d3.json("datosd3.json", function(data) {
+			var xMax = data.datos.length;
+				yMax = d3.max(data.datos);
+			var y = d3.scale.linear().domain([yMax, 0]).range([0 + margin, h - margin]),
+				x = d3.scale.linear().domain([0, xMax]).range([0 + margin, w - margin]);
+			var color = d3.scale.linear().domain([yMax, 0]).range(['orangered', 'darkblue']);
+    		svg.selectAll("circle")
+			   .data(data.datos)
+			   .enter()
+			   .append("circle")
+			   .attr("r", 1)
+			   .transition()
+			   .attr("r", 20)
+			   .attr("cx", function(d, i){return x(i+1)})
+			   .attr("cy", function(d){return y(d)})
+			   .style("fill", function(d){return color(d)})
+			   .duration(000);
+
+			//Define AXIS
+			var xAxis = d3.svg.axis()
+            		      .scale(x)
+                  		  .orient("bottom")
+                  		  .ticks(5);
+			svg.append("g")
+			   .attr("class", "axis")
+			   .attr("transform", "translate(0, " + (h - margin) + ")")
+			   .call(xAxis);
+
+			var yAxis = d3.svg.axis()
+            		      .scale(y)
+                  		  .orient("left")
+                  		  .ticks(5);
+			svg.append("g")
+			   .attr("class", "axis")
+			   .attr("transform", "translate(" + margin + ",0)")
+			   .call(yAxis);
+
+		});
+		</script>
+	</body>
+</html>

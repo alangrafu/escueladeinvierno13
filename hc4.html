@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Ejemplo Highcharts</title>
+  <link rel="stylesheet" href="css/estilo.css">
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+</head>
+<body>
+    <div id="container" class="highcharts"></div>
+    <script src="js/highcharts.js"></script>
+    <script type="text/javascript">
+    //DATOS
+    var datos = [
+                    ["Empresa A", 44.0],
+                    ["Empresa B", 10.0],
+                    ["Empresa C", 14.1],
+                    ["Empresa D", 20.3],
+                    ["Empresa E", 11.6],                                    
+                ];
+
+    //CREACION DE VISUALIZACION
+$(function () {
+        $('#container').highcharts({
+            title: {
+                text: 'Participación del mercado'
+            },
+            series: [{
+                type: 'pie',
+                data: datos
+            }]
+        });
+    });
+    
+    $("#container").highcharts(config);
+    </script>
+</body>
+</html>

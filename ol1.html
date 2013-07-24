@@ -1,0 +1,15 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Ejemplo OpenLayers</title>
+	</head>
+<body>
+	<div id="demoMap" style="height:500px;"></div>
+	<script src="js/OpenLayers.js"></script>
+	<script>
+    map = new OpenLayers.Map("demoMap");
+    map.addLayer(new OpenLayers.Layer.OSM());
+    map.zoomToMaxExtent();
+	</script>
+</body>
+</html>

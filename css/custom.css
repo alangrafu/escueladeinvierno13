@@ -1,0 +1,47 @@
+@font-face {
+font-family: cabin;
+src: url("Cabin-Regular.otf") format("opentype");
+}
+body{
+	font-family: cabin;
+	font-size: 28px;
+}
+.reveal h2{
+	padding-bottom: 50px;
+}
+.reveal h3{
+	padding-bottom: 50px;
+}
+.reveal h1{
+	padding-bottom: 50px;
+}
+table {
+border:none;
+border-collapse: collapse;
+}
+
+table td {
+border-left: 1px solid #000;
+border-right: 1px solid #000;
+}
+
+table td:first-child {
+border-left: none;
+}
+
+table td:last-child {
+border-right: none;
+}
+
+.reveal iframe{
+	border: 1px solid black;
+}
+
+.reveal tt{
+	font-family: courier;
+}
+
+button{
+
+	font-size: 24px;
+}
